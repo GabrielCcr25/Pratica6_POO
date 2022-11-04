@@ -1,41 +1,37 @@
-package br.com.newton.Questao2;
+package br.com.newton.Questao3;
 import javax.swing.JOptionPane;
 public class Main {
-
     public static void main(String[]args){
-        public static void main(String[] args) {
-            Funcionario[] funcionarios = new Funcionario[10];
-            Funcionario func;
-            Empresa emp1;
-            String nome,email,telefone,departamento,dataEntrada,RG, nomeEmp,CNPJ;
-            Double salario;
-            int qtdeFunc;
-            boolean status=true;
+        /* variaveis de edicao*/
+        int numero, volume, tiragem;
+        String dataEdicao;
+        /*variaveis de Revista*/
+        String tituloRevista;
+        long issn;
+        String periodicidade;
+        /*variaveis do Artigo*/
+        String titulo, resumo, autores;
 
-            for (int i=0;i<2;i++) {
-                nome=JOptionPane.showInputDialog("Nome");
-                email=JOptionPane.showInputDialog("Email");
-                telefone=JOptionPane.showInputDialog("Telefone");
-                departamento=JOptionPane.showInputDialog("Departamento");
-                dataEntrada=JOptionPane.showInputDialog("dataEntrada");
-                RG=JOptionPane.showInputDialog("RG");
-                salario=Double.parseDouble(JOptionPane.showInputDialog("Salario"));
-                func = new Funcionario(nome,email,telefone,departamento,salario,dataEntrada,RG,status);
-                funcionarios[i]=func;
-            }
+        tituloRevista=JOptionPane.showInputDialog("Titulo da Revista");
+        issn=Long.parseLong(JOptionPane.showInputDialog("ISSN"));
+        periodicidade=JOptionPane.showInputDialog("Periodicidade");
 
-            nomeEmp=JOptionPane.showInputDialog("Criando a Empresa, digite Nome");
-            CNPJ=JOptionPane.showInputDialog("CNPJ");
-            qtdeFunc=Integer.parseInt(JOptionPane.showInputDialog("Quantidade de Funcionario"));
-            emp1 = new Empresa(nomeEmp,CNPJ,qtdeFunc);
-            for(Funcionario func1:funcionarios) {
-                emp1.insereFuncionario(func1);
-                System.out.println(func1.mostrarDados());
-            }
+        numero=Integer.parseInt(JOptionPane.showInputDialog("Numero"));
+        volume=Integer.parseInt(JOptionPane.showInputDialog("Volume"));
+        tiragem=Integer.parseInt(JOptionPane.showInputDialog("Tiragem"));
+        dataEdicao=JOptionPane.showInputDialog("Data da Edição");
 
+        Edicao ed1 = new Edicao(numero,volume,dataEdicao,tiragem);
+        RevistaCientifica revista1 = new RevistaCientifica(tituloRevista,issn,periodicidade,ed1);
+
+        ArrayList<Artigo> artigos = new ArrayList<>();
+        for (int i=0; i<10;i++)
+        {
+            titulo=JOptionPane.showInputDialog("Digite Titulo do Artigo");
+            resumo=JOptionPane.showInputDialog("Resumo");
+            autores=JOptionPane.showInputDialog("Autores");
+            artigos.add(new Artigo(titulo, resumo,autores));
+            ed1.adicionaArtigo(artigos.get(i)); //Adiciona os artigos na edicao.
+        }
     }
-
-
-
-
 }
